@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Agenda de Contatos</string>
+    <string name="nome_contato">Nome do Contato</string>
+    <string name="endereco_contato">Endereço</string>
+    <string name="telefone_contato">Telefone</string>
+    <string name="email_contato">E-mail </string>
+    <string name="linkedin_contato">Linkedin</string>
+</resources>
