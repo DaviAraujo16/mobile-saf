@@ -1,6 +1,8 @@
 
 package br.senai.sp.agendacontatos.agenda;
 
+import android.content.Context;
+import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
 
 import br.senai.sp.agendacontatos.R;
@@ -8,12 +10,18 @@ import br.senai.sp.agendacontatos.modelo.Contato;
 
 public class CadastroContatoHelper {
 
+    private TextInputLayout layoutTxtNome;
+    private TextInputLayout layoutTxtEndereco;
+    private TextInputLayout layoutTxtTelefone;
+    private TextInputLayout layoutTxtEmail;
+    private TextInputLayout layoutTxtLinkedin;
     private EditText txtNome;
     private EditText txtEndereco;
     private EditText txtTelefone;
     private EditText txtEmail;
     private EditText txtLinkedin;
     private Contato contato;
+
 
     public CadastroContatoHelper(CadastroActivity activity){
         txtNome = activity.findViewById(R.id.txt_nome);
@@ -45,5 +53,39 @@ public class CadastroContatoHelper {
         this.contato = contato;
     }
 
+    public boolean validarCampos(CadastroActivity activity){
+
+        boolean validado = true;
+
+        layoutTxtNome = activity.findViewById(R.id.layout_txt_nome);
+        layoutTxtEmail = activity.findViewById(R.id.layout_txt_email);
+        layoutTxtEndereco = activity.findViewById(R.id.layout_txt_endereco);
+        layoutTxtTelefone = activity.findViewById(R.id.layout_txt_telefone);
+        layoutTxtLinkedin = activity.findViewById(R.id.layout_txt_linkedin);
+
+        if(txtNome.getText().toString().isEmpty()){
+            layoutTxtNome.setError("Campo vazio!");
+            validado = false;
+        }
+        if(txtTelefone.getText().toString().isEmpty()){
+            layoutTxtTelefone.setError("Campo vazio!");
+            validado = false;
+        }
+        if(txtLinkedin.getText().toString().isEmpty()){
+            layoutTxtLinkedin.setError("Campo vazio!");
+            validado = false;
+        }
+        if(txtEndereco.getText().toString().isEmpty()){
+            layoutTxtEndereco.setError("Campo vazio!");
+            validado = false;
+        }
+        if(txtEmail.getText().toString().isEmpty()){
+            layoutTxtEmail.setError("Campo vazio!");
+            validado = false;
+        }
+
+        return validado;
+
+    }
 
 }

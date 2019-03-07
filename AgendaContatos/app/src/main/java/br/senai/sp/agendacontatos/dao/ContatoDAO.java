@@ -47,11 +47,10 @@ public class ContatoDAO extends SQLiteOpenHelper{
     }
 
     //Esse método salva um contato
-    public boolean salvar(Contato contato){
+    public void salvar(Contato contato){
         SQLiteDatabase db = getWritableDatabase();
         ContentValues dados = getContentValues(contato);
         db.insert("tbl_contato", null, dados);
-        return true;
     }
 
     //Esse metodo lista todos os contatos salvos
