@@ -56,7 +56,7 @@ public class ContatoDAO extends SQLiteOpenHelper{
     //Esse metodo lista todos os contatos salvos
     public List<Contato> getContatos(){
         SQLiteDatabase db = getReadableDatabase();
-        String sql = "SELECT * FROM tbl_contato";
+        String sql = "SELECT * FROM tbl_contato ORDER BY nome";
 
         Cursor c = db.rawQuery(sql,null);
 

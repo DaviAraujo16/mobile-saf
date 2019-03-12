@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent abrirActivityCadastro = new Intent(MainActivity.this, CadastroActivity.class);
                 startActivity(abrirActivityCadastro);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
             }
         });
 
