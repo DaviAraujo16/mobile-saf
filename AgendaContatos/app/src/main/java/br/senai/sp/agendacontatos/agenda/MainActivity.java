@@ -18,6 +18,7 @@ import android.widget.ListView;
 import java.util.List;
 
 import br.senai.sp.agendacontatos.R;
+import br.senai.sp.agendacontatos.adapter.ContatosAdapter;
 import br.senai.sp.agendacontatos.dao.ContatoDAO;
 import br.senai.sp.agendacontatos.modelo.Contato;
 
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         List<Contato> contatos = dao.getContatos();
         dao.close();
 
-        ArrayAdapter<Contato> listaContatoAdapter = new ArrayAdapter<Contato>(this, android.R.layout.simple_list_item_1, contatos);
+        ContatosAdapter listaContatoAdapter = new ContatosAdapter(this, contatos);
         listaContatos.setAdapter(listaContatoAdapter);
     }
 
