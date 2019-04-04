@@ -81,7 +81,7 @@
                 android:id="@+id/layout_txt_endereco"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="15dp"
                 >
                 <EditText
                     android:id="@+id/txt_endereco"
@@ -99,7 +99,7 @@
                 android:id="@+id/layout_txt_telefone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="15dp"
                 >
                 <EditText
                     android:id="@+id/txt_telefone"
@@ -116,7 +116,7 @@
                 android:id="@+id/layout_txt_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="15dp"
                 >
                 <EditText
                     android:id="@+id/txt_email"
@@ -133,7 +133,7 @@
                 android:id="@+id/layout_txt_linkedin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="15dp"
                 >
                 <EditText
                     android:id="@+id/txt_linkedin"

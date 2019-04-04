@@ -17,19 +17,20 @@ public class ContatoDAO extends SQLiteOpenHelper{
 
     //Metodo construtor da classe dao
     public ContatoDAO(Context context) {
-        super(context,"db_contato",null,1);
+        super(context,"db_contato",null,2);
     }
 
     @Override
     //Ao criar o banco de dados ele cria a tbl_contato com essas caracteristicas
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE tbl_contato (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, endereco TEXT NOT NULL, email TEXT NOT NULL, telefone TEXT NOT NULL, linkedin TEXT NOT NULL)";
+        String sql = "CREATE TABLE tbl_contato (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, endereco TEXT NOT NULL, email TEXT NOT NULL, telefone TEXT NOT NULL, linkedin TEXT NOT NULL, foto BLOB NOT NULL)";
         db.execSQL(sql);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        String sql = "ALTER TABLE tbl_filme ADD COLUMN foto BLOB";
+        db.execSQL(sql);
     }
 
     //esse método funciona como um array que organiza as informações em chave e valor da chave
@@ -42,6 +43,7 @@ public class ContatoDAO extends SQLiteOpenHelper{
         dados.put("telefone", contato.getTelefone());
         dados.put("email", contato.getEmail());
         dados.put("linkedin", contato.getLinkedin());
+        dados.put("foto",contato.getFoto());
 
         return dados;
     }
@@ -70,6 +72,7 @@ public class ContatoDAO extends SQLiteOpenHelper{
             contato.setEndereco(c.getString(c.getColumnIndex("endereco")));
             contato.setTelefone(c.getString(c.getColumnIndex("telefone")));
             contato.setLinkedin(c.getString(c.getColumnIndex("linkedin")));
+            contato.setFoto(c.getBlob(c.getColumnIndex("foto")));
             contatos.add(contato);
         }
         return contatos;

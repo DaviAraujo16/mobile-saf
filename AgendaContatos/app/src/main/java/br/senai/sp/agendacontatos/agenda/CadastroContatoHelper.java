@@ -1,11 +1,16 @@
 
 package br.senai.sp.agendacontatos.agenda;
 
-import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
+import android.widget.ImageView;
+
+import java.io.ByteArrayOutputStream;
 
 import br.senai.sp.agendacontatos.R;
+import br.senai.sp.agendacontatos.conversores.Imagem;
 import br.senai.sp.agendacontatos.modelo.Contato;
 
 public class CadastroContatoHelper {
@@ -20,6 +25,7 @@ public class CadastroContatoHelper {
     private EditText txtTelefone;
     private EditText txtEmail;
     private EditText txtLinkedin;
+    private ImageView imageViewContato;
     private Contato contato;
 
 
@@ -29,6 +35,7 @@ public class CadastroContatoHelper {
         txtTelefone = activity.findViewById(R.id.txt_telefone);
         txtEmail = activity.findViewById(R.id.txt_email);
         txtLinkedin = activity.findViewById(R.id.txt_linkedin);
+        imageViewContato = activity.findViewById(R.id.image_view_contato);
         contato = new Contato();
     }
 
@@ -40,6 +47,21 @@ public class CadastroContatoHelper {
         contato.setEmail(txtEmail.getText().toString());
         contato.setLinkedin(txtLinkedin.getText().toString());
 
+        //Foi criado um objeto bitmapDrawble que pega o img_foto com um drawble e o transforma em um bitmapDrawable
+        BitmapDrawable bitmapDrawable = (BitmapDrawable) imageViewContato.getDrawable();
+        //Cria um bitmap que extrai a imagem do bitmapDrawable
+        Bitmap bm = bitmapDrawable.getBitmap();
+
+        //Foi criado um ByteArrayOutPutStream(Fluxo de Saída de Array de byte)
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        Bitmap bitmapReduzido = Bitmap.createScaledBitmap(bm,300,300,true);
+        //A imagem é comprimida para ser enviada para o bd
+        bitmapReduzido.compress(Bitmap.CompressFormat.PNG,0, byteArrayOutputStream);
+        //Pegou o Fluxo de Saída de Array de byte e trasforma em um Array de Byte
+        byte[] fotoArray = byteArrayOutputStream.toByteArray();
+        //Setou a imagem
+        contato.setFoto(fotoArray);
+
         return contato;
     }
 
@@ -50,6 +72,10 @@ public class CadastroContatoHelper {
         txtTelefone.setText(contato.getTelefone());
         txtLinkedin.setText(contato.getLinkedin());
 
+        //Se a foto não for igual a null faça a conversão de array de byte para bitmap
+        if(contato.getFoto() != null){
+            imageViewContato.setImageBitmap(Imagem.arrayToBitmap(contato.getFoto()));
+        }
         this.contato = contato;
     }
 
@@ -79,7 +105,7 @@ public class CadastroContatoHelper {
             layoutTxtEndereco.setError("Campo vazio!");
             validado = false;
         }
-        if(txtEmail.getText().toString().isEmpty()){
+        if(txtEmail.getText().toString().isEmpty()) {
             layoutTxtEmail.setError("Campo vazio!");
             validado = false;
         }
